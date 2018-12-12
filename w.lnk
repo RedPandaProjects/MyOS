@@ -1,0 +1,15 @@
+name TEMP/KERNEL.BIN                
+output raw 
+OFFSET=0x8000
+file SRC/KERNEL/KERNEL.OBJS
+file LIB/KERNEL.LIB
+OPTION NODEFAULTLIBS,OSNAME=’MyOs’,START=ENTRY
+option stack=1K
+FORMAT DOS COM
+order
+	
+	clname CODE    segaddr=0x800 
+	clname DATA 
+	clname STACK    
+	clname BSS 
+

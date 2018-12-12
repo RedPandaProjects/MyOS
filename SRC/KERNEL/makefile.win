@@ -1,0 +1,27 @@
+ASM=wasm
+CC=wcc
+CPP=wpp
+LIB=wlib 
+CFLAGS= -0 -s -wx -d0 -fr -zl -ms
+ASMFLAG=-0 -mt
+
+INCLUDE_FILE=stdio.h
+
+INCLUDE=..\..\INCLUDE
+INCLUDE_PRIVATE=..\INCLUDE
+
+all: KERNEL.OBJS
+
+KERNEL.OBJS:  entry.obj main.obj 
+	del KERNEL.OBJS 
+	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj 
+
+main.obj: main.c
+	$(CC) $(CFLAGS) main.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+	
+entry.obj: entry.asm 
+	$(ASM) $(ASMFLAG) entry.asm
+
+clear:
+	del *.obj
+	del KERNEL.OBJS

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\INCLUDE\INTR.h" />
+    <ClInclude Include="..\INCLUDE\STDIO.h" />
+    <ClInclude Include="..\INCLUDE\STRING.h" />
+    <ClInclude Include="..\INCLUDE\TYPE.h" />
+    <ClInclude Include="..\SRC\INCLUDE\INTERS.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SRC\KERNEL\kernel.c" />
+    <ClCompile Include="..\SRC\KERNEL\main.c" />
+    <ClCompile Include="..\SRC\LIB\intr.c" />
+    <ClCompile Include="..\SRC\LIB\stdio.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\makefile.win" />
+    <None Include="..\SRC\BOOT\FBOOT.ASM" />
+    <None Include="..\SRC\KERNEL\entry.asm" />
+    <None Include="..\SRC\KERNEL\makefile.win" />
+    <None Include="..\SRC\LIB\dointr.asm" />
+    <None Include="..\SRC\LIB\makefile.win" />
+    <None Include="..\w.lnk" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A12F73B5-B098-4C76-A5CD-A5A5E3FF88BD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>DISK.img</NMakeOutput>
+    <NMakePreprocessorDefinitions>VS;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeBuildCommandLine>..\binw\mingw32-make -f makefile.win --directory=../</NMakeBuildCommandLine>
+    <NMakeIncludeSearchPath>..\INCLUDE;..\SRC\INCLUDE</NMakeIncludeSearchPath>
+    <NMakeCleanCommandLine>..\binw\mingw32-make -f makefile.win --directory=../ clear</NMakeCleanCommandLine>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

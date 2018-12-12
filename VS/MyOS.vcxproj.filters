@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="SRC">
+      <UniqueIdentifier>{742765e9-0039-4d37-ab3f-1f95947eed2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\BOOT">
+      <UniqueIdentifier>{d3ba3cf7-3294-4a9c-8d5d-855d007602e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\INCLUDE">
+      <UniqueIdentifier>{84e4a250-5f05-4bae-be7c-13924f6fdcc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\KERNEL">
+      <UniqueIdentifier>{c2346917-9a40-412b-bc73-d15a33333674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\LIB">
+      <UniqueIdentifier>{23bf643c-1f58-42ba-8f71-f2c240ca831f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="INCLUDE">
+      <UniqueIdentifier>{816c2ece-ebdd-4b3b-b37d-ef945520c09d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SRC\INCLUDE\INTERS.h">
+      <Filter>SRC\INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\STDIO.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\STRING.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\TYPE.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\INTR.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SRC\KERNEL\kernel.c">
+      <Filter>SRC\KERNEL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\LIB\stdio.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\main.c">
+      <Filter>SRC\KERNEL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\LIB\intr.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SRC\BOOT\FBOOT.ASM">
+      <Filter>SRC\BOOT</Filter>
+    </None>
+    <None Include="..\SRC\KERNEL\entry.asm">
+      <Filter>SRC\KERNEL</Filter>
+    </None>
+    <None Include="..\SRC\LIB\makefile.win">
+      <Filter>SRC\LIB</Filter>
+    </None>
+    <None Include="..\SRC\KERNEL\makefile.win">
+      <Filter>SRC\KERNEL</Filter>
+    </None>
+    <None Include="..\makefile.win" />
+    <None Include="..\w.lnk" />
+    <None Include="..\SRC\LIB\dointr.asm">
+      <Filter>SRC\LIB</Filter>
+    </None>
+  </ItemGroup>
+</Project>

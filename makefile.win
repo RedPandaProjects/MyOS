@@ -1,0 +1,40 @@
+ASM=wasm
+CC=wcc
+CPP=wpp
+LIB=wlib 
+CFLAGS= -0 -s -wx -d0 -fr -zl -ms
+ASMFLAG=-0 -mt
+
+MAKE="BINW/mingw32-make"
+
+INCLUDE_FILE=stdio.h
+INCLUDE=I
+
+%.obj: %.c $(INCLUDE_FILE)
+	$(CC) $(CFLAGS) $<  -i=$(INCLUDE)
+	
+
+all: BUILD_LIB BUILD_KERNEL TEMP/DISK.IMG
+	
+TEMP/DISK.IMG: TEMP/KERNEL.BIN TEMP/BOOT.BIN 
+	dd if=TEMP/ZERO.ima of=TEMP/DISK.IMG conv=notrunc
+	dd if=TEMP/BOOT.bin of=TEMP/DISK.IMG conv=notrunc
+	dd if=TEMP/KERNEL.BIN of=TEMP/DISK.IMG seek=33 bs=512 conv=notrunc
+
+TEMP/KERNEL.BIN:  SRC/KERNEL/KERNEL.OBJS LIB/KERNEL.LIB w.lnk
+	wlink @w.lnk
+
+TEMP/BOOT.BIN: SRC/BOOT/FBOOT.ASM
+	BINW/yasm -f bin  -o .\TEMP\BOOT.BIN SRC/BOOT/FBOOT.ASM
+	
+
+BUILD_LIB:
+	$(MAKE) --directory=SRC/KERNEL --makefile=makefile.win all
+	
+BUILD_KERNEL:
+	$(MAKE) --directory=SRC/LIB --makefile=makefile.win all
+
+
+clear:
+	$(MAKE) --directory=SRC/KERNEL --makefile=makefile.win clear
+	$(MAKE) --directory=SRC/LIB --makefile=makefile.win clear

@@ -1,0 +1,28 @@
+ASM=wasm
+CC=wcc
+CPP=wpp
+LIB=wlib 
+CFLAGS= -0 -s -wx -d0 -fr -zl -ms
+ASMFLAG=-0 -mt
+
+
+INCLUDE=..\..\INCLUDE
+INCLUDE_PRIVATE=..\INCLUDE
+
+all: ../../LIB/KERNEL.LIB
+
+../../LIB/KERNEL.LIB:  stdio.obj  intr.obj dointr.obj
+	del ..\..\LIB\KERNEL.LIB
+	$(LIB) -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj
+
+stdio.obj: stdio.c ../../INCLUDE/stdio.h
+	$(CC) $(CFLAGS) stdio.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+intr.obj: intr.c ../../INCLUDE/intr.h
+	$(CC) $(CFLAGS) intr.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)	
+
+dointr.obj: dointr.asm 
+	$(ASM) $(ASMFLAG) dointr.asm
+
+clear:
+	del *.obj
+	del ..\..\LIB\KERNEL.LIB

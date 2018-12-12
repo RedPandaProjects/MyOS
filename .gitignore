@@ -1,3 +1,5 @@
+VS/.vs
+BINW/QEMU
 # Prerequisites
 *.d
 
@@ -5,6 +7,7 @@
 *.o
 *.ko
 *.obj
+*.objs
 *.elf
 
 # Linker output
