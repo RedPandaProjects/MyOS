@@ -7,7 +7,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\INCLUDE\BIOS.h" />
     <ClInclude Include="..\INCLUDE\INTR.h" />
+    <ClInclude Include="..\INCLUDE\STDARG.h" />
     <ClInclude Include="..\INCLUDE\STDIO.h" />
     <ClInclude Include="..\INCLUDE\STRING.h" />
     <ClInclude Include="..\INCLUDE\TYPE.h" />
@@ -16,8 +18,10 @@
   <ItemGroup>
     <ClCompile Include="..\SRC\KERNEL\kernel.c" />
     <ClCompile Include="..\SRC\KERNEL\main.c" />
+    <ClCompile Include="..\SRC\LIB\bios.c" />
     <ClCompile Include="..\SRC\LIB\intr.c" />
     <ClCompile Include="..\SRC\LIB\stdio.c" />
+    <ClCompile Include="..\SRC\LIB\type.asm" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\makefile.win" />

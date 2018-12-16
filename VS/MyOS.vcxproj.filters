@@ -36,6 +36,12 @@
     <ClInclude Include="..\INCLUDE\INTR.h">
       <Filter>INCLUDE</Filter>
     </ClInclude>
+    <ClInclude Include="..\INCLUDE\BIOS.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\STDARG.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SRC\KERNEL\kernel.c">
@@ -48,6 +54,12 @@
       <Filter>SRC\KERNEL</Filter>
     </ClCompile>
     <ClCompile Include="..\SRC\LIB\intr.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\LIB\bios.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\LIB\type.asm">
       <Filter>SRC\LIB</Filter>
     </ClCompile>
   </ItemGroup>

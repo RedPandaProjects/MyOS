@@ -11,14 +11,17 @@ INCLUDE_PRIVATE=..\INCLUDE
 
 all: ../../LIB/KERNEL.LIB
 
-../../LIB/KERNEL.LIB:  stdio.obj  intr.obj dointr.obj
+../../LIB/KERNEL.LIB:  stdio.obj  intr.obj dointr.obj bios.obj
 	del ..\..\LIB\KERNEL.LIB
-	$(LIB) -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj
+	$(LIB) -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj +bios.obj
 
 stdio.obj: stdio.c ../../INCLUDE/stdio.h
 	$(CC) $(CFLAGS) stdio.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
-intr.obj: intr.c ../../INCLUDE/intr.h
+intr.obj: intr.c ../../INCLUDE/intr.h ../../INCLUDE/type.h
 	$(CC) $(CFLAGS) intr.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)	
+
+bios.obj: bios.c ../../INCLUDE/bios.h ../../INCLUDE/type.h
+	$(CC) $(CFLAGS) bios.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
 dointr.obj: dointr.asm 
 	$(ASM) $(ASMFLAG) dointr.asm

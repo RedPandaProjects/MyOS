@@ -9,4 +9,6 @@
 #define INTERRUPT  __interrupt
 #define RTLINK __declspec(__watcall)
 #endif
+void __cdecl FAR*get_far(int seg,int adr);
+ int __cdecl get_ds();
 #endif

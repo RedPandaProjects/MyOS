@@ -14,13 +14,16 @@ all: KERNEL.OBJS
 
 KERNEL.OBJS:  entry.obj main.obj 
 	del KERNEL.OBJS 
-	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj 
+	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj
 
-main.obj: main.c
+main.obj: main.c ../../INCLUDE/stdio.h ../../INCLUDE/intr.h ../../INCLUDE/type.h ../../INCLUDE/bios.h
 	$(CC) $(CFLAGS) main.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
-	
+
 entry.obj: entry.asm 
 	$(ASM) $(ASMFLAG) entry.asm
+
+kernel.obj: kernel.c ../../INCLUDE/stdio.h ../../INCLUDE/intr.h ../../INCLUDE/type.h ../../INCLUDE/bios.h
+	$(CC) $(CFLAGS) kernel.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
 clear:
 	del *.obj

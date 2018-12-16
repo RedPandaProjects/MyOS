@@ -1,23 +1,29 @@
 ﻿  mingw32-make: Entering directory 'E:/GameDev/MyOS'
   "BINW/mingw32-make" --directory=SRC/KERNEL --makefile=makefile.win all
   mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL'
-  mingw32-make[1]: Nothing to be done for 'all'.
-  mingw32-make[1]: Leaving directory 'E:/GameDev/MyOS/SRC/KERNEL'
-  "BINW/mingw32-make" --directory=SRC/LIB --makefile=makefile.win all
-  mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/LIB'
-  wasm -0 -mt dointr.asm
-  Open Watcom Assembler Version 1.9
-  Portions Copyright (c) 1992-2002 Sybase, Inc. All Rights Reserved.
+  wcc -0 -s -wx -d0 -fr -zl -ms main.c -i=..\..\INCLUDE -i=..\INCLUDE
+  Open Watcom C16 Optimizing Compiler Version 1.9
+  Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
   See http://www.openwatcom.org/ for details.
-  dointr.asm: 87 lines, 0 warnings, 0 errors
-  del ..\..\LIB\KERNEL.LIB
-  wlib  -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj
+  ..\..\INCLUDE\stdio.h(6): Warning! W138: No newline at end of file
+  ..\..\INCLUDE\TYPE.h(12): Warning! W138: No newline at end of file
+  ..\..\INCLUDE\intr.h(29): Warning! W138: No newline at end of file
+  ..\..\INCLUDE\TYPE.h(12): Warning! W138: No newline at end of file
+  ..\..\INCLUDE\BIOS.h(5): Warning! W138: No newline at end of file
+  main.c: 9 lines, included 64, 5 warnings, 0 errors
+  Code size: 2
+  del KERNEL.OBJS 
+  wlib  -fac  KERNEL.OBJS  +entry.obj  +main.obj 
   Open Watcom Library Manager Version 1.9
   Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
   See http://www.openwatcom.org/ for details.
-  Warning! Cannot open '../../LIB/KERNEL.LIB' - library will be created
+  Warning! Cannot open 'KERNEL.OBJS' - library will be created
+  mingw32-make[1]: Leaving directory 'E:/GameDev/MyOS/SRC/KERNEL'
+  "BINW/mingw32-make" --directory=SRC/LIB --makefile=makefile.win all
+  mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/LIB'
+  mingw32-make[1]: Nothing to be done for 'all'.
   mingw32-make[1]: Leaving directory 'E:/GameDev/MyOS/SRC/LIB'
   wlink @w.lnk
   Open Watcom Linker Version 1.9
@@ -26,8 +32,6 @@
   See http://www.openwatcom.org/ for details.
   loading object files
   creating a ТMyOsТ executable
-  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\main.c): segment relocation at 0800:001c
-  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\main.c): segment relocation at 0800:003e
   dd if=TEMP/ZERO.ima of=TEMP/DISK.IMG conv=notrunc
   rawwrite dd for windows version 0.6beta3.
   Written by John Newbigin <jn@it.swin.edu.au>
