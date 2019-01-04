@@ -14,7 +14,7 @@ INCLUDE=I
 	$(CC) $(CFLAGS) $<  -i=$(INCLUDE)
 	
 
-all: BUILD_LIB BUILD_KERNEL TEMP/DISK.IMG
+all: BUILD_LIB BUILD_KERNEL BUILD_MATH TEMP/DISK.IMG
 	
 TEMP/DISK.IMG: TEMP/KERNEL.BIN TEMP/BOOT.BIN 
 	dd if=TEMP/ZERO.ima of=TEMP/DISK.IMG conv=notrunc
@@ -34,7 +34,9 @@ BUILD_LIB:
 BUILD_KERNEL:
 	$(MAKE) --directory=SRC/LIB --makefile=makefile.win all
 
-
+BUILD_MATH:
+	$(MAKE) --directory=SRC/MATH --makefile=makefile.win all
+	
 clear:
 	$(MAKE) --directory=SRC/KERNEL --makefile=makefile.win clear
 	$(MAKE) --directory=SRC/LIB --makefile=makefile.win clear

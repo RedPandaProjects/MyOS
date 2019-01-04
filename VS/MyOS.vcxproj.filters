@@ -62,6 +62,9 @@
     <ClCompile Include="..\SRC\LIB\type.asm">
       <Filter>SRC\LIB</Filter>
     </ClCompile>
+    <ClCompile Include="..\SRC\LIB\inters.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SRC\BOOT\FBOOT.ASM">

@@ -1,0 +1,20 @@
+ASM=wasm
+CC=wcc
+CPP=wpp
+LIB=wlib 
+CFLAGS= -0 -s -wx -d0 -fr -zl -ms
+ASMFLAG=-0 -mt
+
+all: MATH.OBJS
+
+MATH.OBJS:  i8d086.obj
+	del MATH.OBJS 
+	$(LIB) -fac  MATH.OBJS  +i8d086.obj
+
+
+i8d086.obj: i8d086.asm mdef.inc struct.inc
+	$(ASM) $(ASMFLAG) i8d086.asm 
+
+clear:
+	del *.obj
+	del MATH.OBJS

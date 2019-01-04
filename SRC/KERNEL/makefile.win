@@ -12,7 +12,7 @@ INCLUDE_PRIVATE=..\INCLUDE
 
 all: KERNEL.OBJS
 
-KERNEL.OBJS:  entry.obj main.obj 
+KERNEL.OBJS:  entry.obj main.obj kernel.obj
 	del KERNEL.OBJS 
 	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj
 

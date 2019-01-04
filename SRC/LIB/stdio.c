@@ -1,27 +1,46 @@
 #include <stdio.h>
+#include <TYPE.h>
 #include "INTERS.h"
 
-void putch(int ch) 
+void __cdecl putch(int ch)
 {
-	_putch_(ch);
+	INTR_WRITE(0, (int)stdout, 1, (int)&ch, get_ds());
+}
+ 
+int print_string(FILE *stream, const char*str)
+{
+	while (str&&*str)
+	{
+		INTR_WRITE(0, (int)stream, 1, (int)str, get_ds());
+		str++;
+	}
+	return 0;
+}
+int print_string_from_va_list(FILE *stream, va_list *arglist)
+{
+	const char* str = va_arg(*arglist, const char*);
+	print_string(stream, str); 
+	return 0; 
 }
 
 #define N_16 0x2
 #define N_SIG 0x1
-#define N_MINUS 0x1
-int print_number(int bytes,int flags,FILE *stream, va_list *arglist)
+#define N_MINUS 0x1 
+void print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 {
-	char out[22];out[21] = 0;
-	char *begin = out + 20;
+	char out[22];
+	char * begin = (char*)out;
 	unsigned long long number = 0;
+	out[21] = 0;
+	begin +=20;
 	switch (bytes)
 	{
 	case sizeof(char):
 		number = va_arg(*arglist,unsigned char);
 		if ((flags&N_SIG) && (number & 1 << 7))
 		{
-			number = number & (~(1 << 7));
-			number = 0x7F & (~number);
+			number = -number;
+			flags |= N_MINUS;
 		}
 		else
 		{
@@ -33,11 +52,11 @@ int print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 			number = va_arg(*arglist, unsigned int);
 			if ((flags&N_SIG) && (number & 1 << 15))
 			{
-				number = number & (~(1 << 15));
-				number = 0x7FFF & (~number);
+				number = -number;
+				flags |= N_MINUS;
 			}
 			else
-			{
+			{ 
 				flags &= ~N_MINUS;
 			}
 			break;
@@ -46,21 +65,21 @@ int print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 			number = va_arg(*arglist, unsigned int);
 			if ((flags&N_SIG) && (number & 1 << 15))
 			{
-				number = number & (~(1 << 15));
-				number = 0x7FFF & (~number);
+				number = -number;
+				flags |= N_MINUS;
 			}
 			else
 			{
-				is_signed = 0;
+				flags &= ~N_MINUS;
 			}
 			break;
 #endif
 	case sizeof(long):
 		number = va_arg(*arglist, unsigned long);
-		if ((flags&N_SIG) && (number & 1 << 31))
+		if ((flags&N_SIG) && (number & 0x80000000))
 		{
-			number = number & (~(1 << 31));
-			number = 0x7FFFFFFF & (~number);
+			number = -number;
+			flags |= N_MINUS;
 		}
 		else
 		{
@@ -69,12 +88,11 @@ int print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 
 		break;
 	case sizeof(long long) :
-		number = va_arg(*arglist, long long);
-		number = va_arg(*arglist, unsigned long);
-		if ((flags&N_SIG) && (number & 1 << 63))
+		number = va_arg(*arglist, unsigned long long);
+		if ((flags&N_SIG) && (number & 0x8000000000000000))
 		{
-			number = number & (~(1 << 31));
-			number = 0x7FFFFFFFFFFFFFFF & (~number);
+			number = -number;
+			flags |= N_MINUS;
 		}
 		else
 		{
@@ -82,7 +100,6 @@ int print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 		}
 		break;
 	default:
-		va_arg(*arglist, int);
 		return;
 		break;
 	}
@@ -93,12 +110,12 @@ int print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 		{
 			*begin = number % 0x10;
 			number = number / 0x10;
-			if (*begin >= 9)
-				*begin += 'A'-9;
+			if (*begin > 9)
+				*begin += 'A'-10;
 			else
 				*begin += '0';
-		
-			begin--;
+			if (number)
+				begin--;
 		}
 	}
 	else
@@ -108,52 +125,106 @@ int print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 			*begin = number % 10;
 			number = number / 10;
 			*begin += '0';
-			begin--;
+			if(number)
+				begin--; 
 		}
-	}
-
+		if (flags&N_MINUS)
+		{
+			print_string(stream, "-");
+		}
+	} 
+	print_string(stream, begin);
 }
+int __cdecl printf(const char * format, ...)
+{ 
+	va_list va;
+	va_start(va, format);
+	vprintf(format, va);
+	va_end(va); 
+	return 0;
+} 
 int    __cdecl   vfprintf(FILE *stream, const char *format, va_list arglist)
 {
 	char ch = 0;
 	while (*format)
 	{
-		if (format == '%')
+		if (*format == '%')
 		{
-			int stp = 0;
+			int stp = 1;
 			format++;
-			switch (*format)
+
+			if (*format == '%')
 			{
-			case '%':
 				ch = '%';
-				break;
-			case 'l':
-				stp++;
-				break;
-			case 'h':
-				stp--;
-				break;
-			default:
-				break;
-			}
-			switch (*format)
+			} 
+			else if (*format == 'c')
 			{
-				if()
+				ch = va_arg(arglist, char);
 			}
+			else if (*format == 's')
+			{
+				print_string_from_va_list(stream,&arglist);
+				format++;
+				continue;
+			}
+			else
+			{
+				if (*format == 'l' || *format == 'h' || *format == 'd' || *format == 'u' || *format == 'x')
+				{
+					while (*format)
+					{
+						if (*format == 'l')
+						{
+							stp++;
+						}
+						else if (*format == 'h')
+						{
+							stp--;
+						}
+						else
+						{
+							break;
+						}
+						format++;
+					}
+					if (stp < 0)stp = 0;
+					else if (stp > 3)stp = 3;
+
+					stp = 1 << stp;
+					
+					if (*format == 'u')
+					{
+						print_number(stp, 0, stream, &arglist);
+					}
+					else if (*format == 'd')
+					{
+						print_number(stp, N_SIG, stream, &arglist);
+					}
+					else if (*format == 'x')
+					{
+						print_number(stp, N_16, stream, &arglist);
+					}
+					format++;
+					continue;
+				}
+
+			}
+			format++;
 		}
 		else
 		{
-			ch = *stream;
+			ch = *format;
 		}
-		INTR_WRITE(0, (int)stream, 1, &ch, get_ds());
+		INTR_WRITE(0, (int)stream, 1, (int)&ch, get_ds());
 		format++;
 	}
+	return 0; 
 }
 int     __cdecl  vprintf(const char *format, va_list arglist)
 {
-	vprintf(stdout, arglist);
+	return vfprintf(stdout, format,arglist);
 }
 int   __cdecl    vscanf(const char *format, va_list arglist)
 {
-
+	return 0;
 }

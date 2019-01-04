@@ -11,11 +11,11 @@ INCLUDE_PRIVATE=..\INCLUDE
 
 all: ../../LIB/KERNEL.LIB
 
-../../LIB/KERNEL.LIB:  stdio.obj  intr.obj dointr.obj bios.obj
+../../LIB/KERNEL.LIB:  stdio.obj  intr.obj dointr.obj bios.obj type.obj inters.obj
 	del ..\..\LIB\KERNEL.LIB
-	$(LIB) -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj +bios.obj
+	$(LIB) -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj +bios.obj +type.obj +inters.obj
 
-stdio.obj: stdio.c ../../INCLUDE/stdio.h
+stdio.obj: stdio.c ../../INCLUDE/stdio.h  ../../INCLUDE/type.h  ../../INCLUDE/stdarg.h 
 	$(CC) $(CFLAGS) stdio.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 intr.obj: intr.c ../../INCLUDE/intr.h ../../INCLUDE/type.h
 	$(CC) $(CFLAGS) intr.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)	
@@ -23,8 +23,14 @@ intr.obj: intr.c ../../INCLUDE/intr.h ../../INCLUDE/type.h
 bios.obj: bios.c ../../INCLUDE/bios.h ../../INCLUDE/type.h
 	$(CC) $(CFLAGS) bios.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
+inters.obj: inters.c ../INCLUDE/inters.h ../../INCLUDE/type.h
+	$(CC) $(CFLAGS) inters.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+
 dointr.obj: dointr.asm 
 	$(ASM) $(ASMFLAG) dointr.asm
+
+type.obj: type.asm 
+	$(ASM) $(ASMFLAG) type.asm
 
 clear:
 	del *.obj

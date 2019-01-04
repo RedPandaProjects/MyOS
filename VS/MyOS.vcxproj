@@ -19,6 +19,7 @@
     <ClCompile Include="..\SRC\KERNEL\kernel.c" />
     <ClCompile Include="..\SRC\KERNEL\main.c" />
     <ClCompile Include="..\SRC\LIB\bios.c" />
+    <ClCompile Include="..\SRC\LIB\inters.c" />
     <ClCompile Include="..\SRC\LIB\intr.c" />
     <ClCompile Include="..\SRC\LIB\stdio.c" />
     <ClCompile Include="..\SRC\LIB\type.asm" />
