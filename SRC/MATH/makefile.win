@@ -2,18 +2,23 @@ ASM=wasm
 CC=wcc
 CPP=wpp
 LIB=wlib 
-CFLAGS= -0 -s -wx -d0 -fr -zl -ms
+CFLAGS= -0 -s -we -d0 -fr -zl -ms -ohsr
 ASMFLAG=-0 -mt
 
 all: MATH.OBJS
 
-MATH.OBJS:  i8d086.obj
+MATH.OBJS:  i8d086.obj  i4d.obj i4m.obj
 	del MATH.OBJS 
-	$(LIB) -fac  MATH.OBJS  +i8d086.obj
+	$(LIB) -fac  MATH.OBJS  +i8d086.obj +i4d.obj +i4m.obj
 
 
 i8d086.obj: i8d086.asm mdef.inc struct.inc
 	$(ASM) $(ASMFLAG) i8d086.asm 
+i4d.obj: i4d.asm mdef.inc struct.inc
+	$(ASM) $(ASMFLAG) i4d.asm 
+
+i4m.obj: i4m.asm mdef.inc struct.inc
+	$(ASM) $(ASMFLAG) i4m.asm 
 
 clear:
 	del *.obj

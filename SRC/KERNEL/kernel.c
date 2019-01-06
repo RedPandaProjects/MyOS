@@ -1,43 +1,38 @@
 #include <INTR.h>
+#include <DISPLAY.h>
+#include <CONSOLE.h>
 #define  REG_INTR(ID,NAME) INTR_##NAME=ID,
+#define  REG_INTR_FAR(ID,NAME) INTR_##NAME=ID,
 enum Intrs
 {
 #include <INTERS.h>
 };
+ 
 
-#pragma aux _putch_ = \
-    "mov ah,0x0E"\
-	"xor bx,bx"\
-	"int 0x10"\
-	 modify [bx]\  
-parm[ax];
-
-void write_screen(int size,int es,int adrs)
+void Kernel(union Regs FAR*regs)
 {
-	char FAR* text = get_far(es, adrs);
-	while (size--)
-	{
-		_putch_(*text);
-		text++;
-	}
-}
-
-void INTERRUPT KernelInterrupt(union Regs regs)
-{
-	//_putch_(0x1);
-	switch (regs.bReg.ah)
+	switch (regs->bReg.ah)
 	{
 	case INTR_WRITE:
-		if (regs.wReg.bx == -1)
+		if (regs->wReg.bx == -1)
 		{
-			write_screen(regs.wReg.cx, regs.wReg.es, regs.wReg.dx);
+			PrintText(get_far(regs->wReg.es, regs->wReg.dx), regs->wReg.cx);
 		}
 		break;
 	case INTR_READ:
 		break;
+	case INTR_CALL:
+		regs->wReg.ax = ConsoleCall(get_far(regs->wReg.es, regs->wReg.bx));
+		break;
 	default:
 		break;
 	}
+	
+}
+
+void INTERRUPT KernelInterrupt(union Regs regs)
+{
+	Kernel(&regs);
 }
 void InitKernel()
 {

@@ -2,7 +2,7 @@ ASM=wasm
 CC=wcc
 CPP=wpp
 LIB=wlib 
-CFLAGS= -0 -s -wx -d0 -fr -zl -ms
+CFLAGS= -0 -s -we -d0 -fr -zl -ms -ohsr
 ASMFLAG=-0 -mt
 
 
@@ -11,26 +11,39 @@ INCLUDE_PRIVATE=..\INCLUDE
 
 all: ../../LIB/KERNEL.LIB
 
-../../LIB/KERNEL.LIB:  stdio.obj  intr.obj dointr.obj bios.obj type.obj inters.obj
+../../LIB/KERNEL.LIB:  stdio.obj  intr.obj dointr.obj bios.obj ctype.obj system_a.obj inters.obj string.obj stdlib.obj system.obj
 	del ..\..\LIB\KERNEL.LIB
-	$(LIB) -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj +bios.obj +type.obj +inters.obj
+	$(LIB) -fa  ../../LIB/KERNEL.LIB  +stdio.obj +intr.obj +dointr.obj +bios.obj +ctype.obj +inters.obj +string.obj +system_a.obj +stdlib.obj +system.obj
 
-stdio.obj: stdio.c ../../INCLUDE/stdio.h  ../../INCLUDE/type.h  ../../INCLUDE/stdarg.h 
+stdio.obj: stdio.c
 	$(CC) $(CFLAGS) stdio.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
-intr.obj: intr.c ../../INCLUDE/intr.h ../../INCLUDE/type.h
+
+intr.obj: intr.c 
 	$(CC) $(CFLAGS) intr.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)	
 
-bios.obj: bios.c ../../INCLUDE/bios.h ../../INCLUDE/type.h
+bios.obj: bios.c 
 	$(CC) $(CFLAGS) bios.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
-inters.obj: inters.c ../INCLUDE/inters.h ../../INCLUDE/type.h
+inters.obj: inters.c 
 	$(CC) $(CFLAGS) inters.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+
+string.obj: string.c 
+	$(CC) $(CFLAGS) string.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+
+ctype.obj: ctype.c
+	$(CC) $(CFLAGS) ctype.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+
+stdlib.obj:  stdlib.c
+	$(CC) $(CFLAGS) stdlib.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
 dointr.obj: dointr.asm 
 	$(ASM) $(ASMFLAG) dointr.asm
 
-type.obj: type.asm 
-	$(ASM) $(ASMFLAG) type.asm
+system_a.obj: system_a.asm 
+	$(ASM) $(ASMFLAG) system_a.asm
+	
+system.obj:  system.c
+	$(CC) $(CFLAGS) system.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
 clear:
 	del *.obj

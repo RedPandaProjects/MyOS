@@ -20,3 +20,21 @@ int biosdisk(int cmd, int drive, int head, int track, int sector, int nsects, vo
 	int ax =  (nsects)|(cmd << 8);
 	return _biosdisk_(ax, dx, cx, buffer);
 }
+#pragma aux _bioskey_ = \
+	"int 0x16"\
+parm[ax]\
+value[ax];
+int _bioskey_(int);
+int bioskey(int cmd)
+{
+	return _bioskey_(cmd);
+}
+#pragma aux _biosprint_ = \
+	"int 0x10"\
+parm[ax][bx]\
+value[ax];
+int _biosprint_(int,int);
+int biosprint(int cmd, int byte, int port)
+{
+	return _biosprint_(cmd<<8|byte,port);
+}

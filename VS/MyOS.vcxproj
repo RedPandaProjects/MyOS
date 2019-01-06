@@ -11,26 +11,45 @@
     <ClInclude Include="..\INCLUDE\INTR.h" />
     <ClInclude Include="..\INCLUDE\STDARG.h" />
     <ClInclude Include="..\INCLUDE\STDIO.h" />
+    <ClInclude Include="..\INCLUDE\STDLIB.h" />
     <ClInclude Include="..\INCLUDE\STRING.h" />
-    <ClInclude Include="..\INCLUDE\TYPE.h" />
+    <ClInclude Include="..\INCLUDE\CTYPE.h" />
+    <ClInclude Include="..\INCLUDE\SYSTEM.h" />
+    <ClInclude Include="..\SRC\INCLUDE\DISPLAY.h" />
     <ClInclude Include="..\SRC\INCLUDE\INTERS.h" />
+    <ClInclude Include="..\SRC\INCLUDE\CONSOLE.h" />
+    <ClInclude Include="..\SRC\INCLUDE\KERNEL.h" />
+    <ClInclude Include="..\SRC\INCLUDE\MEMORY.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SRC\KERNEL\console.c" />
+    <ClCompile Include="..\SRC\KERNEL\display.c" />
     <ClCompile Include="..\SRC\KERNEL\kernel.c" />
     <ClCompile Include="..\SRC\KERNEL\main.c" />
+    <ClCompile Include="..\SRC\KERNEL\memory.c" />
     <ClCompile Include="..\SRC\LIB\bios.c" />
+    <ClCompile Include="..\SRC\LIB\ctype.c" />
     <ClCompile Include="..\SRC\LIB\inters.c" />
     <ClCompile Include="..\SRC\LIB\intr.c" />
     <ClCompile Include="..\SRC\LIB\stdio.c" />
-    <ClCompile Include="..\SRC\LIB\type.asm" />
+    <ClCompile Include="..\SRC\LIB\stdlib.c" />
+    <ClCompile Include="..\SRC\LIB\string.c" />
+    <ClCompile Include="..\SRC\LIB\system.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\makefile.win" />
     <None Include="..\SRC\BOOT\FBOOT.ASM" />
     <None Include="..\SRC\KERNEL\entry.asm" />
     <None Include="..\SRC\KERNEL\makefile.win" />
+    <None Include="..\SRC\LIB\system_a.asm" />
     <None Include="..\SRC\LIB\dointr.asm" />
     <None Include="..\SRC\LIB\makefile.win" />
+    <None Include="..\SRC\MATH\i4d.asm" />
+    <None Include="..\SRC\MATH\i4m.asm" />
+    <None Include="..\SRC\MATH\i8d086.asm" />
+    <None Include="..\SRC\MATH\makefile.win" />
+    <None Include="..\SRC\MATH\mdef.inc" />
+    <None Include="..\SRC\MATH\struct.inc" />
     <None Include="..\w.lnk" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -19,6 +19,9 @@
     <Filter Include="INCLUDE">
       <UniqueIdentifier>{816c2ece-ebdd-4b3b-b37d-ef945520c09d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SRC\MATH">
+      <UniqueIdentifier>{18a78516-fd5c-446d-b665-be71d757d92f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SRC\INCLUDE\INTERS.h">
@@ -30,9 +33,6 @@
     <ClInclude Include="..\INCLUDE\STRING.h">
       <Filter>INCLUDE</Filter>
     </ClInclude>
-    <ClInclude Include="..\INCLUDE\TYPE.h">
-      <Filter>INCLUDE</Filter>
-    </ClInclude>
     <ClInclude Include="..\INCLUDE\INTR.h">
       <Filter>INCLUDE</Filter>
     </ClInclude>
@@ -41,6 +41,27 @@
     </ClInclude>
     <ClInclude Include="..\INCLUDE\STDARG.h">
       <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\CTYPE.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\STDLIB.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\CONSOLE.h">
+      <Filter>SRC\INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\KERNEL.h">
+      <Filter>SRC\INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\DISPLAY.h">
+      <Filter>SRC\INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\SYSTEM.h">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\MEMORY.h">
+      <Filter>SRC\INCLUDE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,10 +80,28 @@
     <ClCompile Include="..\SRC\LIB\bios.c">
       <Filter>SRC\LIB</Filter>
     </ClCompile>
-    <ClCompile Include="..\SRC\LIB\type.asm">
+    <ClCompile Include="..\SRC\LIB\inters.c">
       <Filter>SRC\LIB</Filter>
     </ClCompile>
-    <ClCompile Include="..\SRC\LIB\inters.c">
+    <ClCompile Include="..\SRC\LIB\string.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\LIB\ctype.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\LIB\stdlib.c">
+      <Filter>SRC\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\console.c">
+      <Filter>SRC\KERNEL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\display.c">
+      <Filter>SRC\KERNEL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\memory.c">
+      <Filter>SRC\KERNEL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\LIB\system.c">
       <Filter>SRC\LIB</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,6 +122,27 @@
     <None Include="..\w.lnk" />
     <None Include="..\SRC\LIB\dointr.asm">
       <Filter>SRC\LIB</Filter>
+    </None>
+    <None Include="..\SRC\MATH\makefile.win">
+      <Filter>SRC\MATH</Filter>
+    </None>
+    <None Include="..\SRC\MATH\mdef.inc">
+      <Filter>SRC\MATH</Filter>
+    </None>
+    <None Include="..\SRC\MATH\struct.inc">
+      <Filter>SRC\MATH</Filter>
+    </None>
+    <None Include="..\SRC\MATH\i8d086.asm">
+      <Filter>SRC\MATH</Filter>
+    </None>
+    <None Include="..\SRC\LIB\system_a.asm">
+      <Filter>SRC\LIB</Filter>
+    </None>
+    <None Include="..\SRC\MATH\i4d.asm">
+      <Filter>SRC\MATH</Filter>
+    </None>
+    <None Include="..\SRC\MATH\i4m.asm">
+      <Filter>SRC\MATH</Filter>
     </None>
   </ItemGroup>
 </Project>

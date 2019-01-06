@@ -1,6 +1,6 @@
 #ifndef INTER_H
 #define INTER_H
-#include "TYPE.h"
+#include <SYSTEM.h>
 struct ByteRegs {
 	unsigned :16; unsigned : 16;
 	unsigned : 16; unsigned : 16;

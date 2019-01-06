@@ -1,25 +1,31 @@
 ﻿  mingw32-make: Entering directory 'E:/GameDev/MyOS'
   "BINW/mingw32-make" --directory=SRC/KERNEL --makefile=makefile.win all
   mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL'
-  mingw32-make[1]: Nothing to be done for 'all'.
-  mingw32-make[1]: Leaving directory 'E:/GameDev/MyOS/SRC/KERNEL'
-  "BINW/mingw32-make" --directory=SRC/LIB --makefile=makefile.win all
-  mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/LIB'
-  wcc -0 -s -wx -d0 -fr -zl -ms stdio.c -i=..\..\INCLUDE -i=..\INCLUDE
+  wcc -0 -s -we -d0 -fr -zl -ms -ohsr console.c -i=..\..\INCLUDE -i=..\INCLUDE
   Open Watcom C16 Optimizing Compiler Version 1.9
   Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
   See http://www.openwatcom.org/ for details.
-  stdio.c(230): Warning! W138: No newline at end of file
-  stdio.c: 230 lines, included 49, 1 warnings, 0 errors
-  Code size: 889
-  del ..\..\LIB\KERNEL.LIB
-  wlib  -fa  ../../LIB/KERNEL.LIB  stdio.obj +intr.obj +dointr.obj +bios.obj +type.obj +inters.obj
+  console.c: 57 lines, included 201, 0 warnings, 0 errors
+  Code size: 179
+  wcc -0 -s -we -d0 -fr -zl -ms -ohsr memory.c -i=..\..\INCLUDE -i=..\INCLUDE
+  Open Watcom C16 Optimizing Compiler Version 1.9
+  Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+  Source code is available under the Sybase Open Watcom Public License.
+  See http://www.openwatcom.org/ for details.
+  memory.c: 216 lines, included 176, 0 warnings, 0 errors
+  Code size: 806
+  del KERNEL.OBJS 
+  wlib  -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj 
   Open Watcom Library Manager Version 1.9
   Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
   See http://www.openwatcom.org/ for details.
-  Warning! Cannot open '../../LIB/KERNEL.LIB' - library will be created
+  Warning! Cannot open 'KERNEL.OBJS' - library will be created
+  mingw32-make[1]: Leaving directory 'E:/GameDev/MyOS/SRC/KERNEL'
+  "BINW/mingw32-make" --directory=SRC/LIB --makefile=makefile.win all
+  mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/LIB'
+  mingw32-make[1]: Nothing to be done for 'all'.
   mingw32-make[1]: Leaving directory 'E:/GameDev/MyOS/SRC/LIB'
   "BINW/mingw32-make" --directory=SRC/MATH --makefile=makefile.win all
   mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/MATH'
@@ -32,8 +38,8 @@
   See http://www.openwatcom.org/ for details.
   loading object files
   creating a ТMyOsТ executable
-  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:007d
-  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:00b1
+  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:01d4
+  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:01f3
   dd if=TEMP/ZERO.ima of=TEMP/DISK.IMG conv=notrunc
   rawwrite dd for windows version 0.6beta3.
   Written by John Newbigin <jn@it.swin.edu.au>
@@ -56,6 +62,6 @@
   This program is covered by terms of the GPL Version 2.
   
   notrunc
-  4+1 records in
-  4+1 records out
+  12+1 records in
+  12+1 records out
   mingw32-make: Leaving directory 'E:/GameDev/MyOS'

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <TYPE.h>
+#include <CTYPE.h>
 #include "INTERS.h"
 
 void __cdecl putch(int ch)
@@ -19,6 +19,7 @@ int print_string(FILE *stream, const char*str)
 int print_string_from_va_list(FILE *stream, va_list *arglist)
 {
 	const char* str = va_arg(*arglist, const char*);
+	if (str == 0)return 0;
 	print_string(stream, str); 
 	return 0; 
 }
@@ -39,7 +40,7 @@ void print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 		number = va_arg(*arglist,unsigned char);
 		if ((flags&N_SIG) && (number & 1 << 7))
 		{
-			number = -number;
+			number = -(char)number;
 			flags |= N_MINUS;
 		}
 		else
@@ -52,7 +53,7 @@ void print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 			number = va_arg(*arglist, unsigned int);
 			if ((flags&N_SIG) && (number & 1 << 15))
 			{
-				number = -number;
+				number = -(int)number;
 				flags |= N_MINUS;
 			}
 			else
@@ -65,7 +66,7 @@ void print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 			number = va_arg(*arglist, unsigned int);
 			if ((flags&N_SIG) && (number & 1 << 15))
 			{
-				number = -number;
+				number = -(int)number;
 				flags |= N_MINUS;
 			}
 			else
@@ -78,7 +79,7 @@ void print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 		number = va_arg(*arglist, unsigned long);
 		if ((flags&N_SIG) && (number & 0x80000000))
 		{
-			number = -number;
+			number = -(long)number;
 			flags |= N_MINUS;
 		}
 		else
@@ -103,7 +104,11 @@ void print_number(int bytes,int flags,FILE *stream, va_list *arglist)
 		return;
 		break;
 	}
-
+	if (number == 0)
+	{
+		print_string(stream, "0");
+		return;
+	}
 	if (flags&N_16)
 	{
 		while (number)
@@ -160,6 +165,9 @@ int    __cdecl   vfprintf(FILE *stream, const char *format, va_list arglist)
 			else if (*format == 'c')
 			{
 				ch = va_arg(arglist, char);
+				INTR_WRITE(0, (int)stream, 1, (int)&ch, get_ds());
+				format++;
+				continue;
 			}
 			else if (*format == 's')
 			{

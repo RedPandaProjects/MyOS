@@ -13,6 +13,5 @@ int   __cdecl    vscanf(const char *format, va_list arglist);
 int   __cdecl    vsprintf(char *buffer, const char *format, va_list arglist);
 int    __cdecl   vsscanf(const char *buffer, const char *format, va_list arglist);
 
-void    __cdecl  putch(int);
- 
+void    __cdecl  putch(int); 
 #endif
