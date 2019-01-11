@@ -74,7 +74,7 @@ void MemoryFree(void FAR* ptr)
 		}
 	}
 }
-
+#ifdef MEM_DEBUG
 static void FAR*Console_Mem=0;
 static char FAR*Console_Mem_Cur = 0;
 int Console_MemoryAlloc()
@@ -214,3 +214,4 @@ int Console_MemoryTo()
 	}
 	return 0;
 }
+#endif

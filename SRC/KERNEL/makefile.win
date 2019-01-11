@@ -12,9 +12,9 @@ INCLUDE_PRIVATE=..\INCLUDE
 
 all: KERNEL.OBJS
 
-KERNEL.OBJS:  entry.obj main.obj kernel.obj console.obj display.obj memory.obj
+KERNEL.OBJS:  entry.obj main.obj kernel.obj console.obj display.obj memory.obj disk.obj abort.obj
 	del KERNEL.OBJS 
-	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj 
+	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj +disk.obj +abort.obj 
 
 main.obj: main.c
 	$(CC) $(CFLAGS) main.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
@@ -33,6 +33,12 @@ display.obj: display.c
 
 memory.obj: memory.c
 	$(CC) $(CFLAGS) memory.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+
+abort.obj: abort.c
+	$(CC) $(CFLAGS) abort.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+
+disk.obj: disk.c
+	$(CC) $(CFLAGS) abort.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
 clear:
 	del *.obj

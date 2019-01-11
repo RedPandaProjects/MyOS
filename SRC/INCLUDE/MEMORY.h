@@ -10,10 +10,14 @@ int MemoryStatus();
 void FAR* MemoryAlloc(unsigned long size);
 void MemoryFree(void FAR* ptr);
 
+#undef MEM_DEBUG
+
+#ifdef MEM_DEBUG
 int Console_MemoryAlloc();
 int Console_MemoryFree();
 int Console_MemoryStatus();
 int Console_MemorySet();
 int Console_MemoryCall();
 int Console_MemoryTo();
+#endif
 #endif

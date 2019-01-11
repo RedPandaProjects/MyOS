@@ -15,6 +15,8 @@
     <ClInclude Include="..\INCLUDE\STRING.h" />
     <ClInclude Include="..\INCLUDE\CTYPE.h" />
     <ClInclude Include="..\INCLUDE\SYSTEM.h" />
+    <ClInclude Include="..\SRC\INCLUDE\ABORT.h" />
+    <ClInclude Include="..\SRC\INCLUDE\DISK.h" />
     <ClInclude Include="..\SRC\INCLUDE\DISPLAY.h" />
     <ClInclude Include="..\SRC\INCLUDE\INTERS.h" />
     <ClInclude Include="..\SRC\INCLUDE\CONSOLE.h" />
@@ -22,7 +24,9 @@
     <ClInclude Include="..\SRC\INCLUDE\MEMORY.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SRC\KERNEL\abort.c" />
     <ClCompile Include="..\SRC\KERNEL\console.c" />
+    <ClCompile Include="..\SRC\KERNEL\disk.c" />
     <ClCompile Include="..\SRC\KERNEL\display.c" />
     <ClCompile Include="..\SRC\KERNEL\kernel.c" />
     <ClCompile Include="..\SRC\KERNEL\main.c" />

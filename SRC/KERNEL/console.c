@@ -16,12 +16,14 @@ ConsoleCommand ConsoleCommands[]=
 	{"test",test},
 	{"cls",ClearScreen},
 	{"mem",MemoryStatus},
+#ifdef MEM_DEBUG
 	{"mem_alloc",Console_MemoryAlloc},
 	{"mem_free",Console_MemoryFree},
 	{"mem_status",Console_MemoryStatus},
 	{"mem_set",Console_MemorySet},
 	{"mem_call",Console_MemoryCall},
 	{"mem_to",Console_MemoryTo},
+#endif
 	{0,0}
 };
 int ConsoleCall(const char FAR* cmd)

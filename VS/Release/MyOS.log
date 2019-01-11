@@ -1,20 +1,13 @@
 ﻿  mingw32-make: Entering directory 'E:/GameDev/MyOS'
   "BINW/mingw32-make" --directory=SRC/KERNEL --makefile=makefile.win all
   mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL'
-  wcc -0 -s -we -d0 -fr -zl -ms -ohsr console.c -i=..\..\INCLUDE -i=..\INCLUDE
-  Open Watcom C16 Optimizing Compiler Version 1.9
-  Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
-  Source code is available under the Sybase Open Watcom Public License.
-  See http://www.openwatcom.org/ for details.
-  console.c: 57 lines, included 201, 0 warnings, 0 errors
-  Code size: 179
   wcc -0 -s -we -d0 -fr -zl -ms -ohsr memory.c -i=..\..\INCLUDE -i=..\INCLUDE
   Open Watcom C16 Optimizing Compiler Version 1.9
   Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
   See http://www.openwatcom.org/ for details.
-  memory.c: 216 lines, included 176, 0 warnings, 0 errors
-  Code size: 806
+  memory.c: 217 lines, included 180, 0 warnings, 0 errors
+  Code size: 253
   del KERNEL.OBJS 
   wlib  -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj 
   Open Watcom Library Manager Version 1.9
@@ -62,6 +55,6 @@
   This program is covered by terms of the GPL Version 2.
   
   notrunc
-  12+1 records in
-  12+1 records out
+  10+1 records in
+  10+1 records out
   mingw32-make: Leaving directory 'E:/GameDev/MyOS'

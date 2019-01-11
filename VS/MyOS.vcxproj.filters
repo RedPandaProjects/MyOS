@@ -63,6 +63,12 @@
     <ClInclude Include="..\SRC\INCLUDE\MEMORY.h">
       <Filter>SRC\INCLUDE</Filter>
     </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\DISK.h">
+      <Filter>SRC\INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\ABORT.h">
+      <Filter>SRC\INCLUDE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SRC\KERNEL\kernel.c">
@@ -103,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="..\SRC\LIB\system.c">
       <Filter>SRC\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\abort.c">
+      <Filter>SRC\KERNEL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\disk.c">
+      <Filter>SRC\KERNEL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
