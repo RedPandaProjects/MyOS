@@ -1,0 +1,28 @@
+ASM=wasm
+CC=wcc
+CPP=wpp
+LIB=wlib 
+CFLAGS= -0 -s -we -d0 -fr -zl -ms -ohsr
+ASMFLAG=-0 -mt
+
+
+INCLUDE=..\..\..\INCLUDE
+INCLUDE_PRIVATE=..\..\INCLUDE
+
+all: FS.OBJS
+
+FS.OBJS:  fs.obj fat.obj fat12.obj fatblock.obj
+	del FS.OBJS 
+	$(LIB) -fac  FS.OBJS  +fs.obj +fat.obj +fat12.obj +fatblock.obj
+
+fs.obj: fs.c
+	$(CC) $(CFLAGS) fs.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+fat.obj: fat.c
+	$(CC) $(CFLAGS) fat.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+fat12.obj: fat12.c
+	$(CC) $(CFLAGS) fat12.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+fatblock.obj: fatblock.c
+	$(CC) $(CFLAGS) fatblock.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+clear:
+	del *.obj
+	del FS.OBJS

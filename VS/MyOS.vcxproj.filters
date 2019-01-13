@@ -22,6 +22,12 @@
     <Filter Include="SRC\MATH">
       <UniqueIdentifier>{18a78516-fd5c-446d-b665-be71d757d92f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SRC\KERNEL\FS">
+      <UniqueIdentifier>{51e0c470-c2fe-428a-bd8d-d3cc35bb5135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\INCLUDE\FS">
+      <UniqueIdentifier>{433e3c12-0805-4dec-ad9a-4eb8fcd74b3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SRC\INCLUDE\INTERS.h">
@@ -68,6 +74,18 @@
     </ClInclude>
     <ClInclude Include="..\SRC\INCLUDE\ABORT.h">
       <Filter>SRC\INCLUDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT.h">
+      <Filter>SRC\INCLUDE\FS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT12.h">
+      <Filter>SRC\INCLUDE\FS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FATBlock.h">
+      <Filter>SRC\INCLUDE\FS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\FS\FS.h">
+      <Filter>SRC\INCLUDE\FS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +134,18 @@
     <ClCompile Include="..\SRC\KERNEL\disk.c">
       <Filter>SRC\KERNEL</Filter>
     </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\FS\fatblock.c">
+      <Filter>SRC\KERNEL\FS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\FS\fs.c">
+      <Filter>SRC\KERNEL\FS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\FS\fat.c">
+      <Filter>SRC\KERNEL\FS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\FS\fat12.c">
+      <Filter>SRC\KERNEL\FS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SRC\BOOT\FBOOT.ASM">
@@ -155,6 +185,9 @@
     </None>
     <None Include="..\SRC\MATH\i4m.asm">
       <Filter>SRC\MATH</Filter>
+    </None>
+    <None Include="..\SRC\KERNEL\FS\makefile.win">
+      <Filter>SRC\KERNEL\FS</Filter>
     </None>
   </ItemGroup>
 </Project>

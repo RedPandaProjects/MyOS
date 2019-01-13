@@ -3,6 +3,7 @@
 #include "CONSOLE.h"
 #include "DISPLAY.h"
 #include "MEMORY.h"
+#include "DISK.h"
 int   Argc;
 char* Argv[256];
 int test()
@@ -23,6 +24,9 @@ ConsoleCommand ConsoleCommands[]=
 	{"mem_set",Console_MemorySet},
 	{"mem_call",Console_MemoryCall},
 	{"mem_to",Console_MemoryTo},
+#endif
+#ifdef DISK_DEBUG
+		{"disk_read",Console_DiskRead},
 #endif
 	{0,0}
 };

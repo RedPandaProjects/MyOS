@@ -1,15 +1,34 @@
 ﻿  mingw32-make: Entering directory 'E:/GameDev/MyOS'
   "BINW/mingw32-make" --directory=SRC/KERNEL --makefile=makefile.win all
   mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL'
-  wcc -0 -s -we -d0 -fr -zl -ms -ohsr memory.c -i=..\..\INCLUDE -i=..\INCLUDE
+  "../../BINW/mingw32-make" --directory=FS --makefile=makefile.win all
+  mingw32-make[2]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL/FS'
+  wcc -0 -s -we -d0 -fr -zl -ms -ohsr fat12.c -i=..\..\..\INCLUDE -i=..\..\INCLUDE
   Open Watcom C16 Optimizing Compiler Version 1.9
   Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
   See http://www.openwatcom.org/ for details.
-  memory.c: 217 lines, included 180, 0 warnings, 0 errors
-  Code size: 253
+  fat12.c: 0 lines, 0 warnings, 0 errors
+  Code size: 0
+  wcc -0 -s -we -d0 -fr -zl -ms -ohsr fatblock.c -i=..\..\..\INCLUDE -i=..\..\INCLUDE
+  Open Watcom C16 Optimizing Compiler Version 1.9
+  Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+  Source code is available under the Sybase Open Watcom Public License.
+  See http://www.openwatcom.org/ for details.
+  fatblock.c: 0 lines, 0 warnings, 0 errors
+  Code size: 0
+  del FS.OBJS 
+  Не удается найти E:\GameDev\MyOS\SRC\KERNEL\FS\FS.OBJS
+  wlib  -fac  FS.OBJS  +fs.obj +fat.obj +fat12.obj +fatblock.obj
+  Open Watcom Library Manager Version 1.9
+  Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+  Source code is available under the Sybase Open Watcom Public License.
+  See http://www.openwatcom.org/ for details.
+  Warning! Cannot open 'FS.OBJS' - library will be created
+  Warning! Library contains no external symbols
+  mingw32-make[2]: Leaving directory 'E:/GameDev/MyOS/SRC/KERNEL/FS'
   del KERNEL.OBJS 
-  wlib  -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj 
+  wlib  -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj +disk.obj +abort.obj  +FS/FS.objs
   Open Watcom Library Manager Version 1.9
   Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
@@ -31,8 +50,8 @@
   See http://www.openwatcom.org/ for details.
   loading object files
   creating a ТMyOsТ executable
-  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:01d4
-  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:01f3
+  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:01db
+  Warning! W1019: file SRC/KERNEL/KERNEL.OBJS(E:\GameDev\MyOS\SRC\KERNEL\kernel.c): segment relocation at 0800:01fa
   dd if=TEMP/ZERO.ima of=TEMP/DISK.IMG conv=notrunc
   rawwrite dd for windows version 0.6beta3.
   Written by John Newbigin <jn@it.swin.edu.au>
@@ -55,6 +74,6 @@
   This program is covered by terms of the GPL Version 2.
   
   notrunc
-  10+1 records in
-  10+1 records out
+  11+1 records in
+  11+1 records out
   mingw32-make: Leaving directory 'E:/GameDev/MyOS'

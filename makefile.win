@@ -40,3 +40,4 @@ BUILD_MATH:
 clear:
 	$(MAKE) --directory=SRC/KERNEL --makefile=makefile.win clear
 	$(MAKE) --directory=SRC/LIB --makefile=makefile.win clear
+	$(MAKE) --directory=SRC/MATH --makefile=makefile.win clear

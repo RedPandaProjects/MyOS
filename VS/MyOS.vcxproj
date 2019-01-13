@@ -18,6 +18,10 @@
     <ClInclude Include="..\SRC\INCLUDE\ABORT.h" />
     <ClInclude Include="..\SRC\INCLUDE\DISK.h" />
     <ClInclude Include="..\SRC\INCLUDE\DISPLAY.h" />
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT.h" />
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT12.h" />
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FATBlock.h" />
+    <ClInclude Include="..\SRC\INCLUDE\FS\FS.h" />
     <ClInclude Include="..\SRC\INCLUDE\INTERS.h" />
     <ClInclude Include="..\SRC\INCLUDE\CONSOLE.h" />
     <ClInclude Include="..\SRC\INCLUDE\KERNEL.h" />
@@ -28,6 +32,10 @@
     <ClCompile Include="..\SRC\KERNEL\console.c" />
     <ClCompile Include="..\SRC\KERNEL\disk.c" />
     <ClCompile Include="..\SRC\KERNEL\display.c" />
+    <ClCompile Include="..\SRC\KERNEL\FS\fat.c" />
+    <ClCompile Include="..\SRC\KERNEL\FS\fat12.c" />
+    <ClCompile Include="..\SRC\KERNEL\FS\fatblock.c" />
+    <ClCompile Include="..\SRC\KERNEL\FS\fs.c" />
     <ClCompile Include="..\SRC\KERNEL\kernel.c" />
     <ClCompile Include="..\SRC\KERNEL\main.c" />
     <ClCompile Include="..\SRC\KERNEL\memory.c" />
@@ -44,6 +52,7 @@
     <None Include="..\makefile.win" />
     <None Include="..\SRC\BOOT\FBOOT.ASM" />
     <None Include="..\SRC\KERNEL\entry.asm" />
+    <None Include="..\SRC\KERNEL\FS\makefile.win" />
     <None Include="..\SRC\KERNEL\makefile.win" />
     <None Include="..\SRC\LIB\system_a.asm" />
     <None Include="..\SRC\LIB\dointr.asm" />

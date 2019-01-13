@@ -4,7 +4,7 @@ CPP=wpp
 LIB=wlib 
 CFLAGS= -0 -s -we -d0 -fr -zl -ms -ohsr
 ASMFLAG=-0 -mt
-
+MAKE="../../BINW/mingw32-make"
 INCLUDE_FILE=stdio.h
 
 INCLUDE=..\..\INCLUDE
@@ -12,9 +12,9 @@ INCLUDE_PRIVATE=..\INCLUDE
 
 all: KERNEL.OBJS
 
-KERNEL.OBJS:  entry.obj main.obj kernel.obj console.obj display.obj memory.obj disk.obj abort.obj
+KERNEL.OBJS:  entry.obj main.obj kernel.obj console.obj display.obj memory.obj disk.obj abort.obj  BUILD_FS
 	del KERNEL.OBJS 
-	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj +disk.obj +abort.obj 
+	$(LIB) -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj +disk.obj +abort.obj  +FS/FS.objs
 
 main.obj: main.c
 	$(CC) $(CFLAGS) main.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
@@ -38,8 +38,13 @@ abort.obj: abort.c
 	$(CC) $(CFLAGS) abort.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
 
 disk.obj: disk.c
-	$(CC) $(CFLAGS) abort.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+	$(CC) $(CFLAGS) disk.c -i=$(INCLUDE) -i=$(INCLUDE_PRIVATE)
+
+
+BUILD_FS:
+	$(MAKE) --directory=FS --makefile=makefile.win all
 
 clear:
+	$(MAKE) --directory=FS --makefile=makefile.win clear
 	del *.obj
 	del KERNEL.OBJS
