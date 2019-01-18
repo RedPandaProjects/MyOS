@@ -21,6 +21,7 @@
     <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT.h" />
     <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT12.h" />
     <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FATBlock.h" />
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FATDir.h" />
     <ClInclude Include="..\SRC\INCLUDE\FS\FS.h" />
     <ClInclude Include="..\SRC\INCLUDE\INTERS.h" />
     <ClInclude Include="..\SRC\INCLUDE\CONSOLE.h" />
@@ -35,6 +36,7 @@
     <ClCompile Include="..\SRC\KERNEL\FS\fat.c" />
     <ClCompile Include="..\SRC\KERNEL\FS\fat12.c" />
     <ClCompile Include="..\SRC\KERNEL\FS\fatblock.c" />
+    <ClCompile Include="..\SRC\KERNEL\FS\fatdir.c" />
     <ClCompile Include="..\SRC\KERNEL\FS\fs.c" />
     <ClCompile Include="..\SRC\KERNEL\kernel.c" />
     <ClCompile Include="..\SRC\KERNEL\main.c" />

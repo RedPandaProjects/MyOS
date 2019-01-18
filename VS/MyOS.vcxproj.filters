@@ -28,6 +28,12 @@
     <Filter Include="SRC\INCLUDE\FS">
       <UniqueIdentifier>{433e3c12-0805-4dec-ad9a-4eb8fcd74b3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SRC\INCLUDE\FS\FAT">
+      <UniqueIdentifier>{1ad400f3-bd5f-4794-8460-a73f1eb225a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\KERNEL\FS\FAT">
+      <UniqueIdentifier>{56fc36aa-541c-44fd-91d8-841b9d971f25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SRC\INCLUDE\INTERS.h">
@@ -76,13 +82,16 @@
       <Filter>SRC\INCLUDE</Filter>
     </ClInclude>
     <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT.h">
-      <Filter>SRC\INCLUDE\FS</Filter>
+      <Filter>SRC\INCLUDE\FS\FAT</Filter>
     </ClInclude>
     <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FAT12.h">
-      <Filter>SRC\INCLUDE\FS</Filter>
+      <Filter>SRC\INCLUDE\FS\FAT</Filter>
     </ClInclude>
     <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FATBlock.h">
-      <Filter>SRC\INCLUDE\FS</Filter>
+      <Filter>SRC\INCLUDE\FS\FAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC\INCLUDE\FS\FAT\FATDir.h">
+      <Filter>SRC\INCLUDE\FS\FAT</Filter>
     </ClInclude>
     <ClInclude Include="..\SRC\INCLUDE\FS\FS.h">
       <Filter>SRC\INCLUDE\FS</Filter>
@@ -134,17 +143,20 @@
     <ClCompile Include="..\SRC\KERNEL\disk.c">
       <Filter>SRC\KERNEL</Filter>
     </ClCompile>
-    <ClCompile Include="..\SRC\KERNEL\FS\fatblock.c">
-      <Filter>SRC\KERNEL\FS</Filter>
-    </ClCompile>
     <ClCompile Include="..\SRC\KERNEL\FS\fs.c">
       <Filter>SRC\KERNEL\FS</Filter>
     </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\FS\fatblock.c">
+      <Filter>SRC\KERNEL\FS\FAT</Filter>
+    </ClCompile>
     <ClCompile Include="..\SRC\KERNEL\FS\fat.c">
-      <Filter>SRC\KERNEL\FS</Filter>
+      <Filter>SRC\KERNEL\FS\FAT</Filter>
     </ClCompile>
     <ClCompile Include="..\SRC\KERNEL\FS\fat12.c">
-      <Filter>SRC\KERNEL\FS</Filter>
+      <Filter>SRC\KERNEL\FS\FAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\KERNEL\FS\fatdir.c">
+      <Filter>SRC\KERNEL\FS\FAT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

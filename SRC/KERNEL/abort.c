@@ -2,7 +2,7 @@
 #undef abort
 #include <STDIO.h>
 #include "DISPLAY.h"
-void abort(const char*name, int id, int a, int b, int c, int d)
+void abort(const char*name, unsigned int  id, unsigned int  a, unsigned int  b, unsigned int  c, unsigned int  d)
 {
 	ClearScreen();
 	printf("ABORT!!!\r\n");

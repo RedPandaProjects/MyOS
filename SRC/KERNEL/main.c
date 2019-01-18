@@ -6,6 +6,7 @@
 #include <KERNEL.h>
 #include <MEMORY.h>
 #include <DISK.h>
+#include <FS/FS.h>
 int get_build(const char*date, int start_year, int start_month, int start_day)
 {
 	static const char* month_id[12] =		 { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
@@ -47,6 +48,7 @@ int KernelMain(int drive)
 	InitDisk(drive);
 	printf("MyOS STARTUP...\r\n");
 	printf("Build %d %s\r\n",get_build(__DATE__,2018,12,12),__DATE__);
+	InitFS();
 	printf(">");
 	while(1)
 	{

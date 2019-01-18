@@ -4,31 +4,33 @@
 void InitFS();
 typedef struct 
 {
-	int size;
-	int cntSector;
-	int startSector;
-	int isDir;
+	unsigned int Size;
+	unsigned int StartClyster;
+	unsigned int IsDir;
 } FSItem;
-
-struct FSFunctions
+typedef struct 
 {
-	int (*deleteFile)(const char FAR*name);
-	int(*deleteDir)(const char FAR*name);
+	int (*DeleteFile)(const char FAR*name);
+	int(*DeleteDir)(const char FAR*name);
 
-	int(*existFile)(const char FAR*name);
-	int(*existDir)(const char FAR*name);
+	int(*ExistFile)(const char FAR*name);
+	int(*ExistDir)(const char FAR*name);
 
-	int(*openDir)(const char FAR*name);
-	int(*getFile)(const char FAR*name, FSItem*info);
+	int(*OpenDir)(const char FAR*name);
+	int(*GetItemFromName)(const char FAR*name, FSItem*info);
 
-	int(*getItem)(FSItem*info);
-	int(*nextItem)(FSItem*info);
+	int(*GetItem)(FSItem*info);
+	int(*NextItem)(FSItem*info);
 
+	void FAR*(*GetClusterPointer)();
+	unsigned int(*GetClusterSize)();
 
-	int(*readSector)(int sector,void FAR*out);
-	int(*writeSector)(int sector,const void FAR*out);
-	int(*nextSector)(int sector);
-	int(*allocSector)(int sector);
+	void(*ReadCluster)(unsigned int id);
+	void(*WriteCluster)(unsigned int id);
+	unsigned int (*AllocNextCluster)(unsigned int id);
+	unsigned int(*AllocCluster)();
+	unsigned int(*NextCluster)(unsigned int id);
 
-} F_FS;
+} FSFunctions;
+extern FSFunctions GFSFunctions;
 #endif
