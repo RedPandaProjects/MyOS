@@ -4,7 +4,7 @@
 #define MEM_BLOCK 1 
 #define MEM_BLOCK_START 2
 #include <SYSTEM.h>
-extern char MemBlocks[128];
+extern char MemBlocks[256];
 void InitMemory();
 int MemoryStatus();
 void FAR* MemoryAlloc(unsigned long size);

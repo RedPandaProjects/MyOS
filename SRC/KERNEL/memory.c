@@ -3,38 +3,34 @@
 #include <STDIO.h>
 #include <CONSOLE.h>
 #include <STDLIB.h>
-char MemBlocks[128];
+char MemBlocks[256];
 void InitMemory()
 {
 	memset(MemBlocks, 0, sizeof(MemBlocks));
 } 
-int MemoryStatus()
+int MemoryStatus()  
 {
 	int i, a,cnt; 
 	int offset = 0;
-	for (i = 0; i < 128; i++)
+	int size = 512;
+	for (i = 0; i < 256; i++)
 	{
-		if (MemBlocks[i] == MEM_BLOCK_START)
+		if (MemBlocks[i] != MEM_BLOCK_FREE)
 		{
-			cnt = 1; i++; offset = i - 1;
-			for (a = i; a < 128; a++)
-			{
-				if (MemBlocks[i] == MEM_BLOCK_FREE)break;
-				cnt++;
-			}
-			printf("Block[0x%x000] Size[0x%x000]\r\n",(offset+0x20),cnt );
+			size -= 2;
 		}
 	}
+	printf("Mem Use:%d KB\r\nMem Free:%d KB\r\n", 512 - size, size);
 	return 0;
 }
 
 void FAR* MemoryAlloc(unsigned long size)
 {
 
-	int cnt = (int)((size + 4095) / 4096);
+	int cnt = (int)((size + 2047) / 2048);
 	int cnt_free = 0, i = 0,offset=0;
-	for (i = 0; i < 128; i++)
-	{
+	for (i = 0; i < 256; i++)
+	{ 
 		if (MemBlocks[i] == MEM_BLOCK_FREE)
 		{
 			cnt_free++;
@@ -42,7 +38,7 @@ void FAR* MemoryAlloc(unsigned long size)
 			{
 				memset(&MemBlocks[offset], MEM_BLOCK, cnt);
 				MemBlocks[offset] = MEM_BLOCK_START;
-				return (void FAR*)(((unsigned long)(128 * 0x40) + (offset * 0x100))<<16);
+				return (void FAR*)(((unsigned long)(128 * 0x40) + (offset * 0x80))<<16);
 			}
 		}
 		else
@@ -61,12 +57,12 @@ void MemoryFree(void FAR* ptr)
 	int i;
 	int  block = (unsigned int)((unsigned long)ptr>>16);
 	if(ptr == 0)return;
-	block -= 0x80 * 0x40;
-	block /= 0x100;
+	block -= 128 * 0x40;
+	block /= 0x80;
 	if (MemBlocks[block] == MEM_BLOCK_START)
 	{
 		MemBlocks[block] = MEM_BLOCK;
-		for ( i = block; i < 128; i++)
+		for ( i = block; i < 256; i++)
 		{
 			if (MemBlocks[i] != MEM_BLOCK)
 				break;
@@ -102,7 +98,7 @@ int Console_MemoryFree()
 int Console_MemoryStatus()
 {
 	int i = 0;
-	for (; i < 128; i++)
+	for (; i < 256; i++)
 	{
 		printf("%d",MemBlocks[i]);
 	}

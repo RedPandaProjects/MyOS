@@ -17,7 +17,7 @@ ConsoleCommand ConsoleCommands[]=
 	{"test",test},
 	{"cls",ClearScreen},
 	{"mem",MemoryStatus},
-#ifdef MEM_DEBUG
+#ifdef MEM_DEBUG  
 	{"mem_alloc",Console_MemoryAlloc},
 	{"mem_free",Console_MemoryFree},
 	{"mem_status",Console_MemoryStatus},
