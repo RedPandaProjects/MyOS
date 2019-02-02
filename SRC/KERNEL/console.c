@@ -4,6 +4,7 @@
 #include "DISPLAY.h"
 #include "MEMORY.h"
 #include "DISK.h"
+#include "FS/FS.h"
 int   Argc;
 char* Argv[256];
 int test()
@@ -17,6 +18,8 @@ ConsoleCommand ConsoleCommands[]=
 	{"test",test},
 	{"cls",ClearScreen},
 	{"mem",MemoryStatus},
+	{"dir",Console_DIR},
+{"cd",Console_CD},
 #ifdef MEM_DEBUG  
 	{"mem_alloc",Console_MemoryAlloc},
 	{"mem_free",Console_MemoryFree},

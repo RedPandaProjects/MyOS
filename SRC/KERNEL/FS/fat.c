@@ -8,11 +8,12 @@
 #include <STDIO.h>
 #include <MEMORY.h>
 #include <FS/FAT/FATDir.h>
+#include <FS/FS.h>
 FATBootBlock GFATBootBlock;
 FATInfo GFATInfo;
 
 void FAR*GFSSector=0;
-
+static void FATInitFunctions();
 int InitFAT()
 {
 #ifdef FAT_DEBUG
@@ -31,7 +32,7 @@ int InitFAT()
 	
 	if (!InitFAT12())
 	{
-		MemoryFree(GFSSector);
+		ClearFAT();
 		return 0;
 	}
 
@@ -57,6 +58,10 @@ int InitFAT()
 #endif
 	if (GFATClyster)MemoryFree(GFATClyster);
 	GFATClyster = MemoryAlloc(GFATBootBlock.SectorsPerCluster*GFATBootBlock.BytesPerSector);
+	
+	FATInitFunctions();
+
+	//GFSFunctions.OpenDir
 
 	//GFATBlockFunctions.FreeBlocks(0x1);
 	/*
@@ -107,7 +112,113 @@ int InitFAT()
 	FATFreeItem(&dir);*/
 	return 1;
 }
+static int FAT_OpenDir(const char FAR*name)
+{
+	
+	FATEntries dir;
+	char temp[14];
+	char FAR*ext = 0;
+	char FAR*ext_=0;
+	if (strlen(name) == 0)return 1;
+	if (!FATGetItem(&dir))return 0;
 
+	strcpy(temp, name);
+	if (strcmp(temp, ".") != 0 && strcmp(temp, "..") != 0)
+	{
+		ext = strchr(temp, '.');
+		if (ext)
+		{
+			*ext = 0;
+			ext++;
+		}
+	}
+	do
+	{
+		{
+			ext_ = memchr(dir.Name, 0x20, 8);
+			if (ext_)*ext_ = 0;
+
+		}
+		{
+			ext_ = memchr(dir.Ext, 0x20, 3);
+			if (ext_)*ext_ = 0;
+		}
+		if (dir.Flags&0x10&&strncmp(dir.Name, name, 8)==0)
+		{
+			if (!ext || strncmp(dir.Ext, ext, 3) == 0)
+			{
+				FATOpenDir(&dir);
+				return 1;
+			}
+		}
+	} while (FATNextItem(&dir));
+
+	return 0;
+}
+static void FAT_ToRootDir()
+{
+	FATCloseDir();
+}
+
+static int FAT_GetIten(FSItem*item)
+{
+	char FAR*ext = 0;
+	FATEntries e;
+	if (!FATGetItem(&e))return 0;
+	do
+	{
+		if (e.Flags & 0x20 || e.Flags & 0x10)
+		{
+			strncpy(item->Name, e.Name, 8);
+			ext = strchr(item->Name, ' ');
+			if (ext)*ext = 0;
+			if (e.Ext[0] && e.Ext[0] != 0x20)
+			{
+				strcat(item->Name, ".");
+				strncat(item->Name, e.Ext, 3);
+			}
+			item->ID = e.ID;
+			item->Size = e.Size;
+			item->IsDir = !!(e.Flags & 0x10);
+			return 1;
+		}
+	} while (FATNextItem(&e));
+	return 0;
+}
+static int FAT_NextItem(FSItem*item)
+{
+	char FAR*ext = 0;
+	FATEntries e;
+	e.ID = item->ID;
+	if (!FATNextItem(&e))return 0;
+	do
+	{
+		if (e.Flags & 0x20 || e.Flags & 0x10)
+		{
+			strncpy(item->Name, e.Name, 8);
+			ext = strchr(item->Name, ' ');
+			if (ext)*ext = 0;
+			if (e.Ext[0] && e.Ext[0] != 0x20)
+			{
+				strcat(item->Name, ".");
+				strncat(item->Name, e.Ext, 3);
+			}
+		//	item->Name[8] = 0;
+			item->ID = e.ID;
+			item->Size = e.Size;
+			item->IsDir = !!(e.Flags & 0x10);
+			return 1;
+		}
+	} while (FATNextItem(&e));
+	return 0;
+}
+static void FATInitFunctions()
+{
+	GFSFunctions.OpenDir = FAT_OpenDir;
+	GFSFunctions.ToRootDir = FAT_ToRootDir;
+	GFSFunctions.GetItem = FAT_GetIten;
+	GFSFunctions.NextItem = FAT_NextItem;
+}
 void ClearFAT()
 {
 	if (GFSSector)

@@ -1,7 +1,7 @@
 #ifndef FAT_H
 #define FAT_H
 #include <SYSTEM.h>
-#define FAT_DEBUG
+#undef FAT_DEBUG
 #pragma pack(push,1)
 typedef struct
 {

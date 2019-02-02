@@ -78,6 +78,7 @@ int memcmp(const void FAR* cs, const void FAR* ct, int count)
 	"REPNE scasb"\
 	"jz memchr@0"\
 	"mov di,0"\
+	"mov es,di"	\
 	"jmp memchr@1"\
 	"memchr@0:"\
 	"dec di"\
@@ -98,6 +99,7 @@ void FAR* memchr(const void FAR* cs, int c, int count)
 	"REPNE scasb"\
 	"jz memchr@0"\
 	"mov di,0"\
+	"mov es,di"	\
 	"jmp memchr@1"\
 	"memchr@0:"\
 	"inc di"\
@@ -186,7 +188,7 @@ char FAR* strncpy(char FAR* dest, const char FAR* src, int count)
 	{
 		count = strlen(src);
 	}
-	dest[count+1] = 0;
+	dest[count] = 0;
 	return 	memcpy(dest, src, count);
 }
 

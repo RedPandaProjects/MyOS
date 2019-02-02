@@ -230,7 +230,9 @@ void FATOpenDir(FATEntries * item)
 {
 	IsRootDir = 0;
 	LDirClysterBegin = item->Cluster;
+	if (LDirClysterBegin == 0)IsRootDir = 1;
 	LDirClysterCurrent = 0xFFFF;
+
 }
 
 void FATCloseDir()

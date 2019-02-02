@@ -4,9 +4,10 @@
 void InitFS();
 typedef struct 
 {
-	unsigned int Size;
-	unsigned int StartClyster;
+	char Name[24];
+	unsigned long Size;
 	unsigned int IsDir;
+	unsigned int ID;
 } FSItem;
 typedef struct 
 {
@@ -17,6 +18,7 @@ typedef struct
 	int(*ExistDir)(const char FAR*name);
 
 	int(*OpenDir)(const char FAR*name);
+	void(*ToRootDir)();
 	int(*GetItemFromName)(const char FAR*name, FSItem*info);
 
 	int(*GetItem)(FSItem*info);
@@ -33,4 +35,6 @@ typedef struct
 
 } FSFunctions;
 extern FSFunctions GFSFunctions;
+extern int Console_DIR();
+extern int Console_CD();
 #endif

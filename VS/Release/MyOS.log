@@ -1,16 +1,22 @@
 ﻿  mingw32-make: Entering directory 'E:/GameDev/MyOS'
   "BINW/mingw32-make" --directory=SRC/KERNEL --makefile=makefile.win all
   mingw32-make[1]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL'
-  wcc -0 -s -we -d0 -fr -zl -ms -ohsr memory.c -i=..\..\INCLUDE -i=..\INCLUDE
+  "../../BINW/mingw32-make" --directory=FS --makefile=makefile.win all
+  mingw32-make[2]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL/FS'
+  wcc -0 -s -we -d0 -fr -zl -ms -ohsr fs.c -i=..\..\..\INCLUDE -i=..\..\INCLUDE
   Open Watcom C16 Optimizing Compiler Version 1.9
   Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
   Source code is available under the Sybase Open Watcom Public License.
   See http://www.openwatcom.org/ for details.
-  memory.c: 213 lines, included 180, 0 warnings, 0 errors
-  Code size: 222
-  "../../BINW/mingw32-make" --directory=FS --makefile=makefile.win all
-  mingw32-make[2]: Entering directory 'E:/GameDev/MyOS/SRC/KERNEL/FS'
-  mingw32-make[2]: Nothing to be done for 'all'.
+  fs.c: 57 lines, included 329, 0 warnings, 0 errors
+  Code size: 269
+  del FS.OBJS 
+  wlib  -fac  FS.OBJS  +fs.obj +fat.obj +fat12.obj +fatblock.obj +fatdir.obj
+  Open Watcom Library Manager Version 1.9
+  Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+  Source code is available under the Sybase Open Watcom Public License.
+  See http://www.openwatcom.org/ for details.
+  Warning! Cannot open 'FS.OBJS' - library will be created
   mingw32-make[2]: Leaving directory 'E:/GameDev/MyOS/SRC/KERNEL/FS'
   del KERNEL.OBJS 
   wlib  -fac  KERNEL.OBJS  +entry.obj  +main.obj  +kernel.obj +console.obj +display.obj +memory.obj +disk.obj +abort.obj  +FS/FS.objs
@@ -59,6 +65,6 @@
   This program is covered by terms of the GPL Version 2.
   
   notrunc
-  17+1 records in
-  17+1 records out
+  18+1 records in
+  18+1 records out
   mingw32-make: Leaving directory 'E:/GameDev/MyOS'
